@@ -28,7 +28,7 @@ const generateRandomBetween = (min, max, exclude) => {
 
 const renderListItem = (listLength, itemData) => (
   <View style={styles.listItem}>
-    <BodyText>#{listLength- itemData.index}</BodyText>
+    <BodyText>#{listLength - itemData.index}</BodyText>
     <BodyText>{itemData.item}</BodyText>
   </View>
 );
