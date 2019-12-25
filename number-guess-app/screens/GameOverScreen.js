@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, Image } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 
 import BodyText from "../components/BodyText";
 import TitleText from "../components/TitleText";
@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
     marginVertical: 15
   },
   resultText: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 20
   },
   highlight: {
     color: Colors.primary,
-    fontFamily: 'open-sans-bold'
+    fontFamily: "open-sans-bold"
   }
 });
 
