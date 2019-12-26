@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-import { useScreens } from 'react-native-screens';
+import { useScreens } from "react-native-screens";
 
-import MealsNavigator from './navigation/MealsNavigator';
+import MealsNavigator from "./navigation/MealsNavigator";
 
 useScreens();
 
 const fetchFonts = () => {
-  Font.loadAsync({
+  return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf")
   });
@@ -23,13 +23,13 @@ export default function App() {
       <AppLoading
         startAsync={fetchFonts}
         onFinish={() => setFontLoaded(true)}
+        //onError={() => console.log(err)}
       />
     );
   }
 
-  return (
-    <MealsNavigator />
-  );
+
+  return <MealsNavigator />;
 }
 
 const styles = StyleSheet.create({
