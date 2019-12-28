@@ -39,7 +39,7 @@ A simple game in which the user selects a number and the phone has to guess it. 
 
 This App shows different recipes of meals of different categories. It uses Navigation Tab to switch between Meals and Favorites screens and a Drawer to set the Filters of preferred meals. The update of the Favorite meals and the Filters are implemented using Redux.
 
-![](demos/meals-app.gif | width=352)
+<img src="demos/meals-app.gif" width="352">
 
 ## 4. Shop App
 
