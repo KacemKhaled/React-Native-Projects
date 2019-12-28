@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { useScreens } from "react-native-screens";
@@ -38,7 +37,7 @@ export default function App() {
   }
 
   return (
-    <Provider store={store} >
+    <Provider store={store}>
       <MealsNavigator />
     </Provider>
   );
