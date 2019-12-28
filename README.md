@@ -13,11 +13,14 @@ then:
 
 `expo start`
 
+
+
 ## Overview:
-### Level Beginner 1	: [1. ToDo List App](#1.-ToDo-List-App)
-### Level Beginner 2	: [2. Number Guess App](#2.-Number-Guess-App)
-### Level Intermediate	: [3. Meals App](#3.-Meals-App)
-### Level Advanced		: [4. Shop App](#4.-Shop-App)
+### Level Beginner 1	: [1. ToDo List App](#1-ToDo-List-App)
+### Level Beginner 2	: [2. Number Guess App](#2-Number-Guess-App)
+### Level Intermediate	: [3. Meals App](#3-Meals-App)
+### Level Advanced		: [4. Shop App](#4-Shop-App)
+
 
 
 ## 1. ToDo List App
@@ -36,7 +39,7 @@ A simple game in which the user selects a number and the phone has to guess it. 
 
 This App shows different recipes of meals of different categories. It uses Navigation Tab to switch between Meals and Favorites screens and a Drawer to set the Filters of preferred meals. The update of the Favorite meals and the Filters are implemented using Redux.
 
-![](demos/meals-app.gif)
+![](demos/meals-app.gif | width=352)
 
 ## 4. Shop App
 
