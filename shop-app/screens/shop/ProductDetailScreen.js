@@ -24,7 +24,7 @@ const ProductDetailScreen = props => {
       <Image style={styles.image} source={{ uri: selectedProduct.imageUrl }} />
       <View style={styles.actions}>
         <Button color={colors.primary} title="Add to Cart" onPress={() => {
-            dispatch(cartActions.addToCart(selectedProdu));
+            dispatch(cartActions.addToCart(selectedProduct));
         }} />
       </View>
       <Text style={styles.price}>${selectedProduct.price.toFixed(2)}</Text>
