@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Colors from "../../constants/Colors";
 import CartItem from "../../components/shop/CartItem";
-import * as cartActions from '../../store/actions/cart';
+import * as cartActions from "../../store/actions/cart";
+import * as ordersActions from "../../store/actions/orders";
 
 const CartScreen = props => {
   const cartTotalAmount = useSelector(state => state.cart.totalAmount);
@@ -19,7 +20,9 @@ const CartScreen = props => {
         sum: state.cart.items[key].sum
       });
     }
-    return transformedCartItems.sort((a,b) => a.productId > b.productId ? 1 : -1);
+    return transformedCartItems.sort((a, b) =>
+      a.productId > b.productId ? 1 : -1
+    );
   });
   const dispatch = useDispatch();
 
@@ -34,6 +37,9 @@ const CartScreen = props => {
           color={Colors.accent}
           title="Order Now"
           disabled={cartItems.length === 0}
+          onPress={() => {
+            dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
+          }}
         />
       </View>
       <FlatList
@@ -44,14 +50,19 @@ const CartScreen = props => {
             quantity={itemData.item.quantity}
             title={itemData.item.productTitle}
             amount={itemData.item.sum}
+            deletable
             onRemove={() => {
-                dispatch(cartActions.removeFromCart(itemData.item.productId))
+              dispatch(cartActions.removeFromCart(itemData.item.productId));
             }}
           />
         )}
       />
     </View>
   );
+};
+
+CartScreen.navigationOptions = {
+  headerTitle: "Your Cart"
 };
 
 const styles = StyleSheet.create({
