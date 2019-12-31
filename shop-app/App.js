@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 // import { composeWithDevTools } from 'redux-devtools-extension'; //remove when you deploy the app
+import ReduxThunk from 'redux-thunk';
 
 import productsReducer from "./store/reducers/products";
 import cartReducer from './store/reducers/cart';
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   orders: ordersReducer
 });
 
-const store = createStore(rootReducer); 
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk)); 
 // const store = createStore(rootReducer, composeWithDevTools); // remove the second argument when you deploy the app
 
 const fetchFonts = () => {
@@ -47,11 +47,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
