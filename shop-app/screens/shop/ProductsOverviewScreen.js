@@ -19,25 +19,40 @@ import Colors from "../../constants/Colors";
 
 const ProductsOverviewScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState();
   const products = useSelector(state => state.products.availableProducts);
   const dispatch = useDispatch();
 
-  const loadProducts = useCallback( async () => {
+  const loadProducts = useCallback(async () => {
     setError(null);
-    setIsLoading(true);
+    setIsRefreshing(true);
+    // setIsLoading(true);
     try {
       await dispatch(productsActions.fetchProducts());
-      
     } catch (err) {
       setError(err.message);
     }
-    setIsLoading(false);
-  },[dispatch, setIsLoading, setError]);
+    setIsRefreshing(false);
+    // setIsLoading(false);
+  }, [dispatch, setIsLoading, setError]);
 
   useEffect(() => {
-    
-    loadProducts();
+    const willFocusSub = props.navigation.addListener(
+      "willFocus",
+      loadProducts
+    );
+
+    return () => {
+      willFocusSub.remove();
+    };
+  }, [loadProducts]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    loadProducts().then(() => {
+      setIsLoading(false);
+    });
   }, [dispatch, loadProducts]);
 
   const selectItemHandler = (id, title) => {
@@ -47,11 +62,17 @@ const ProductsOverviewScreen = props => {
     });
   };
 
-  if(error) {
-    return <View style={styles.centered}>
+  if (error) {
+    return (
+      <View style={styles.centered}>
         <Text>An error occured</Text>
-        <Button title="Try Again" onPress={loadProducts} color={Colors.primary} />
-  </View>
+        <Button
+          title="Try Again"
+          onPress={loadProducts}
+          color={Colors.primary}
+        />
+      </View>
+    );
   }
 
   if (isLoading) {
@@ -72,6 +93,8 @@ const ProductsOverviewScreen = props => {
 
   return (
     <FlatList
+    onRefresh={loadProducts}
+    refreshing={isRefreshing}
       data={products}
       keyExtractor={item => item.id}
       renderItem={itemData => (
