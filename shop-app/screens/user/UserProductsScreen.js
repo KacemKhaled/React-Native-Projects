@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Button, Platform, Alert } from "react-native";
+import { View, Text, FlatList, Button, Platform, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
@@ -9,7 +9,7 @@ import Colors from "../../constants/Colors";
 import * as productsActions from "../../store/actions/products";
 
 const UserProductsScreen = props => {
-  const UserProducts = useSelector(state => state.products.userProducts);
+  const userProducts = useSelector(state => state.products.userProducts);
   const dispatch = useDispatch();
   const editProductHandler = id => {
     props.navigation.navigate("EditProduct", { productId: id });
@@ -28,9 +28,17 @@ const UserProductsScreen = props => {
     ]);
   };
 
+  if (userProducts.length === 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>No products found, maybe start creating some?</Text>
+      </View>
+    );
+  }
+
   return (
     <FlatList
-      data={UserProducts}
+      data={userProducts}
       keyExtractor={item => item.id}
       renderItem={itemData => (
         <ProductItem
@@ -51,7 +59,7 @@ const UserProductsScreen = props => {
           <Button
             color={Colors.primary}
             title="Delete"
-            onPress={deleteHandler.bind(this,itemData.item.id)}
+            onPress={deleteHandler.bind(this, itemData.item.id)}
           />
         </ProductItem>
       )}
